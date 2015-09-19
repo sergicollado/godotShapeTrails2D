@@ -27,7 +27,7 @@ func _draw():
 	if(points.size() > 0):
 		var  i = 0
 		for point in points:
-			draw_string(font,point,str(i))
+#			draw_string(font,point,str(i))
 #			draw_circle(point,10,Color(100))
 			i+=1
 			
