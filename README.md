@@ -23,6 +23,7 @@ Start Draw check, let you draw a trail one time.
 
 Be sure to provide first an ArrayVector of points, or curve.
 If you add a curve change it bake interval parameter to fix amount of points.
+
 Adjust radio ( trail  width)
 
 Active collisions check add a shape to an Area2D or StaticBody2D node added previously to Path2D Trail node.
