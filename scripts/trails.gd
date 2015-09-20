@@ -51,9 +51,8 @@ func makePolys():
 	var points_size = points.size()
 	var next_coordinates = [];
 	var offset = texture_offset
-	for i in range(points_size):
-		if(i+1>=points_size):
-			return
+	for i in range(points_size-1):
+
 		var texture = body
 		if(i==0):
 			offset = Vector2(0,0)
