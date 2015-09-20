@@ -3,7 +3,7 @@ Scripts and scene components to make trails2D in godotEngine
 
 Check demo scene.
 
-<img src=graphics/"out.gif" />
+<img src="graphics/out.gif" />
 
 
 There are two main scripts:
