@@ -9,7 +9,6 @@ export var active_collision = false
 export var collision_group = ""
 
 var target
-var distance  = 0
 var previous_step
 var trail
 var points = []
@@ -35,7 +34,7 @@ func _fixed_process(delta):
 		return
 	
 	var target_pos = target.get_pos()
-	distance += previous_step.distance_to(target_pos)
+	var distance = previous_step.distance_to(target_pos)
 	if(distance > step_distance):
 		set_point(target_pos)
 		previous_step = target_pos

@@ -20,11 +20,14 @@ func _ready():
 	
 	if(get_child_count() > 0):
 		for node in get_children():
-			if(node.get_type() == "Area2D" or node.get_type() == "StaticBody2D"):
+			if(node.get_type() == "Area2D" ):
 				area = node
-
-	if(collision_group != ""):
-		area.add_to_group(collision_group)
+				area.set_enable_monitoring(true)
+			if( node.get_type() == "StaticBody2D"):
+				area = node
+				
+#	if(collision_group != ""):
+#		area.add_to_group(collision_group)
 	var curve = get_curve()
 	if(curve):
 		points = curve.get_baked_points()
@@ -39,7 +42,8 @@ func makePolys():
 	var collisionPoly
 	if(polygons):
 		polygons.queue_free()
-	
+	if(area):
+		area.clear_shapes()
 	polygons_points.clear()
 	polygons = Node2D.new()
 	add_child(polygons)
@@ -70,30 +74,38 @@ func makePolys():
 		polygons_points.append(polygon)
 		next_coordinates=[polygon[1],polygon[2]]
 		if(active_collision and area):
-			area.clear_shapes()
 			var shape = ConcavePolygonShape2D.new()
 			shape.set_segments(polygon)
 			area.add_shape(shape)
-
 			
 			
-func makePoly(texture,start_point, end_point, next_point, uv_offset, init_coordinates):	
+func makePoly(texture,start_point, end_point, next_point, uv_offset, init_coordinates):
 
 	var seg_init = (end_point-start_point).normalized()
 	var seg_tree = (next_point-start_point).normalized()
 	
 	var points = []
 	if(init_coordinates.size() == 0):
-		init_coordinates = [ 
+		init_coordinates = [
 			Vector2(seg_init.y*radio,-seg_init.x*radio)+start_point,
-		 	Vector2(-seg_init.y*radio,seg_init.x*radio)+start_point
+				Vector2(-seg_init.y*radio,seg_init.x*radio)+start_point
 		]
 
 	points.append(init_coordinates[0])
 	points.append(Vector2(seg_tree.y*radio,-seg_tree.x*radio)+end_point)
-	points.append(Vector2(-seg_tree.y*radio,seg_tree.x*radio)+end_point)
-	points.append(init_coordinates[1])
+
 	
+	var point_two = Vector2(-seg_tree.y*radio,seg_tree.x*radio)+end_point
+	var point_tree = init_coordinates[1]
+	points.append(point_two)
+	points.append(point_tree)
+#	if(point_two.x > point_tree.x):
+#		points.append(point_two)
+#		points.append(point_tree)
+#	else:
+#		points.append(point_tree)
+#		points.append(point_two)
+#		
 	var poly = Polygon2D.new()
 	poly.set_polygon(points)
 	poly.set_texture(texture)
