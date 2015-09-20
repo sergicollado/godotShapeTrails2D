@@ -30,8 +30,13 @@ Active collisions check add a shape to an Area2D or StaticBody2D node added prev
 
 ## trail_maker.gd
 The second script "trail_maker" create an ArrayVector2d from  the target position coordinates, step distance set distance between points.
+
 Need to be used in a Node2D, and get a trail node as a first child. 
+
 First assign target node, be sure this node it's not a child of this script node.
+
 You can active or desactive generation of points.
+
 Max limit let you to limit total amount of points.
+
 Active collision set this property in Trail child node. 
